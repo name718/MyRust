@@ -1,0 +1,17 @@
+# 编译输出目录
+/target/
+
+# Cargo.lock 文件（仅适用于库项目）
+# Cargo.lock
+
+# 编辑器临时文件
+*~
+*.rs.bk
+*.rs.swp
+
+# 文档生成目录
+/doc/
+
+# 其他临时文件
+*.tmp
+*.log
