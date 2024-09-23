@@ -3,6 +3,18 @@ use std::collections::HashMap;
 struct Solution;
 
 impl Solution {
+    pub fn remove_element(nums: &mut Vec<i32>, val: i32) -> usize {
+        let mut i = 0;
+
+        for j in 0..nums.len() {
+            if nums[j] != val {
+                nums[i] = nums[j];
+                i += 1;
+            }
+        }
+
+        i
+    }
     pub fn maximum_length(s: String) -> i32 {
         let n = s.len();
         let mut max_length = -1;
@@ -59,6 +71,15 @@ impl Solution {
 fn main() {
     test1();
     test2();
+    test3();
+}
+
+fn test3(){
+    let mut arr = vec![3, 2,2,3];
+    let val = 3;
+    let index = Solution::remove_element(&mut arr, val);
+    print!("{:?},{}",arr, index);
+
 }
 
 fn test2() {
