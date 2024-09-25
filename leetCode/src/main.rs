@@ -1,8 +1,26 @@
+use core::num;
 use std::collections::HashMap;
 
 struct Solution;
 
 impl Solution {
+    pub fn remove_duplicates_1(nums: &mut Vec<i32>) -> i32 {
+        match nums.len() {
+            len if len < 3 => len as i32,
+            _ => {
+                let mut i = 2; // 第一个有效的位置
+                let len = nums.len();
+                for j in 2..len {
+                    if nums[j] != nums[i - 2] {
+                        nums[i] = nums[j];
+                        i += 1;
+                    }
+                }
+                i as i32
+            },
+        }
+    }
+    
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> usize {
         if nums.is_empty() {
             return 0;
@@ -89,6 +107,13 @@ fn main() {
     test2();
     test3();
     test4();
+    test5();
+}
+
+fn test5(){
+    let mut nums = vec![1,1,1,2,2,3];
+    let len = Solution::remove_duplicates_1(&mut nums);
+    print!("{}",len);
 }
 
 fn test4(){
