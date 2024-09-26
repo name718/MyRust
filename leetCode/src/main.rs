@@ -1,9 +1,25 @@
-use core::num;
+#![allow(unused)]
+
 use std::collections::HashMap;
 
 struct Solution;
 
 impl Solution {
+    pub fn majority_element(nums: Vec<i32>) -> i32 {
+        let mut count_map = HashMap::new();
+        let threshold = nums.len() / 2;
+    
+        for &num in &nums {
+            let count = count_map.entry(num).or_insert(0);
+            *count += 1;
+            if *count > threshold {
+                return num; // 一旦找到了多数元素就返回
+            }
+        }
+    
+        // 由于题目保证存在多数元素，这里不会到达
+        unreachable!()
+    }
     pub fn remove_duplicates_1(nums: &mut Vec<i32>) -> i32 {
         match nums.len() {
             len if len < 3 => len as i32,
@@ -103,11 +119,18 @@ impl Solution {
 }
 
 fn main() {
-    test1();
-    test2();
-    test3();
-    test4();
-    test5();
+    // test1();
+    // test2();
+    // test3();
+    // test4();
+    // test5();
+    test6();
+}
+
+fn test6(){
+    let nums = vec![3,2,3];
+    let num = Solution::majority_element(nums);
+    print!("{}",num);
 }
 
 fn test5(){
