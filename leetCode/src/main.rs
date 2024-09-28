@@ -5,6 +5,17 @@ use std::collections::HashMap;
 struct Solution;
 
 impl Solution {
+    pub fn rotate(nums: &mut Vec<i32>, k: i32) {
+        let n = nums.len();
+        let k = (k % n as i32 + n as i32) % n as i32; // 取模并处理负数情况
+        let mut rotated = vec![0; n]; // 创建一个新的数组
+    
+        for i in 0..n {
+            rotated[((i as i32 + k) % n as i32) as usize] = nums[i]; // 计算新位置
+        }
+    
+        *nums = rotated; // 将新数组赋值回原数组
+    }
     pub fn majority_element(nums: Vec<i32>) -> i32 {
         let mut count_map = HashMap::new();
         let threshold = nums.len() / 2;
@@ -125,6 +136,13 @@ fn main() {
     // test4();
     // test5();
     test6();
+}
+
+fn test7(){
+    let mut nums = vec![1, 2, 3, 4, 5, 6, 7];
+    let k = 3;
+    Solution::rotate(&mut nums, k);
+    println!("轮转后的数组: {:?}", nums);
 }
 
 fn test6(){
