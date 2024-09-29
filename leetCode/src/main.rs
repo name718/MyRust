@@ -5,6 +5,23 @@ use std::collections::HashMap;
 struct Solution;
 
 impl Solution {
+    pub fn max_profit(prices: Vec<i32>) -> i32 {
+        let n = prices.len();
+        if n == 0 {
+            return 0; // 如果数组为空，直接返回0
+        }
+    
+        let mut dp = vec![0; n]; // 初始化dp数组，长度为n，所有值为0
+        let mut min_profit = prices[0]; // 初始化最小价格
+    
+        for i in 1..n {
+            min_profit = std::cmp::min(min_profit, prices[i]); // 更新最小价格
+            dp[i] = std::cmp::max(dp[i-1], prices[i] - min_profit); // 更新dp值
+        }
+    
+        dp[n - 1] // 返回最大利润
+    }
+    
     pub fn rotate(nums: &mut Vec<i32>, k: i32) {
         let n = nums.len();
         let k = (k % n as i32 + n as i32) % n as i32; // 取模并处理负数情况
@@ -137,7 +154,11 @@ fn main() {
     // test5();
     test6();
 }
-
+fn test8(){
+    let price = vec![7,1,5,3,6,4];
+    let max_profit = Solution::max_profit(price);
+    println!("{}",max_profit);
+}
 fn test7(){
     let mut nums = vec![1, 2, 3, 4, 5, 6, 7];
     let k = 3;
