@@ -5,6 +5,13 @@ use std::collections::HashMap;
 struct Solution;
 
 impl Solution {
+    pub fn max_profit_1(prices: Vec<i32>) -> i32 {
+        let mut ans = 0;
+        for i in 1..prices.len(){
+            ans += std::cmp::max(0, prices[i] - prices[i - 1])
+        }
+        ans
+    }
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         let n = prices.len();
         if n == 0 {
@@ -152,7 +159,15 @@ fn main() {
     // test3();
     // test4();
     // test5();
-    test6();
+    // test6();
+    // test7();
+    // test8();
+    test9();
+}
+fn test9(){
+    let price = vec![7,1,5,3,6,4];
+    let max_profit = Solution::max_profit_1(price);
+    println!("{}",max_profit); 
 }
 fn test8(){
     let price = vec![7,1,5,3,6,4];
