@@ -1,10 +1,31 @@
 #![allow(unused)]
 
+use core::num;
 use std::collections::HashMap;
 
 struct Solution;
 
 impl Solution {
+    pub fn can_jump(nums: Vec<i32>) -> bool {
+        //  解题思路：
+        // 维护一个变量 maxReach，表示当前能跳到的最远位置。
+        // 遍历数组的每一个元素，判断当前下标是否可达（即判断当前下标是否小于等于 maxReach）。
+        // 如果当前下标可达，更新 maxReach 为 i + nums[i]，即从当前位置能跳到的最远位置。
+        // 如果遍历过程中 maxReach 已经大于等于最后一个下标，则返回 true。
+        // 如果循环结束后 maxReach 仍未达到最后一个下标，返回 false。
+        let mut max_reach = 0;
+        for i in 0..nums.len(){
+            if i > max_reach {
+                return false
+            }
+            let next = i + nums[i] as usize;
+            max_reach = std::cmp::max(max_reach, next);
+            if max_reach >= nums.len() - 1 {
+                return true
+            }
+        }
+        false
+    }
     pub fn max_profit_1(prices: Vec<i32>) -> i32 {
         let mut ans = 0;
         for i in 1..prices.len(){
@@ -164,11 +185,18 @@ fn main() {
     // test8();
     test9();
 }
+fn  test10(){
+    let nums = vec![2,3,1,1,4];
+    let res = Solution::can_jump(nums);
+    print!("{}",res);
+}
+
 fn test9(){
     let price = vec![7,1,5,3,6,4];
     let max_profit = Solution::max_profit_1(price);
     println!("{}",max_profit); 
 }
+
 fn test8(){
     let price = vec![7,1,5,3,6,4];
     let max_profit = Solution::max_profit(price);
