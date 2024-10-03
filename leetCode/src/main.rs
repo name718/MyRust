@@ -6,6 +6,21 @@ use std::collections::HashMap;
 struct Solution;
 
 impl Solution {
+    pub fn jump(nums: Vec<i32>) -> i32 {
+        let mut next = 0;
+        let mut cur = 0;
+        let mut step = 0;
+        for i in 0..nums.len() {
+            // 如果当前位置 i 超出了当前最远可到达位置 cur，说明需要进行一次跳跃
+            if i > cur {
+                cur = next;
+                step += 1;
+            }
+            // 更新最远可到达位置
+            next = std::cmp::max(next, i + nums[i] as usize);
+        }
+        step
+    }
     pub fn can_jump(nums: Vec<i32>) -> bool {
         //  解题思路：
         // 维护一个变量 maxReach，表示当前能跳到的最远位置。
@@ -183,8 +198,17 @@ fn main() {
     // test6();
     // test7();
     // test8();
-    test9();
+    // test9();
+    // test10();
+    test11();
 }
+
+fn test11(){
+    let mut nums = vec![2,3,1,1,4];
+    let res = Solution::jump(nums);
+    print!("{}",res);
+}
+
 fn  test10(){
     let nums = vec![2,3,1,1,4];
     let res = Solution::can_jump(nums);
