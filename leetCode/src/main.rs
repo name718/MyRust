@@ -6,6 +6,25 @@ use std::collections::HashMap;
 struct Solution;
 
 impl Solution {
+    pub fn h_index(citations: Vec<i32>) -> i32 {
+        // 对引用次数数组进行降序排序
+        let mut sorted_citations = citations.clone();
+        sorted_citations.sort_unstable_by(|a, b| b.cmp(a));
+
+        let mut h = 0;
+        // 遍历排序后的数组
+        for (i, citation) in sorted_citations.iter().enumerate() {
+            // 如果当前论文的引用次数大于等于当前的索引加一，说明至少有 i + 1 篇论文被引用了至少 i + 1 次
+            if *citation >= (i as i32 + 1) {
+                h = i as i32 + 1;
+            } else {
+                // 不满足条件时退出循环
+                break;
+            }
+        }
+        // 返回 H 指数
+        h
+    }
     pub fn jump(nums: Vec<i32>) -> i32 {
         let mut next = 0;
         let mut cur = 0;
@@ -200,7 +219,14 @@ fn main() {
     // test8();
     // test9();
     // test10();
-    test11();
+    // test11();
+    test12();
+}
+
+fn test12(){
+    let citations = vec![3,0,6,1,5];
+    let res = Solution::h_index(citations);
+    print!("{}",res);
 }
 
 fn test11(){
