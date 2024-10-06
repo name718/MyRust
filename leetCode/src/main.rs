@@ -61,6 +61,29 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
+        let n = nums.len();
+        // 创建一个初始值全为 1 的结果向量
+        let mut answer = vec![1; n];
+        // 计算每个元素左边所有元素的乘积
+        let mut left_product = 1;
+        for i in 0..n {
+            // 将当前位置的结果更新为左边所有元素的乘积
+            answer[i] *= left_product;
+            // 更新左边元素的乘积
+            left_product *= nums[i];
+        }
+        // 计算每个元素右边所有元素的乘积
+        let mut right_product = 1;
+        for i in (0..n).rev() {
+            // 将当前位置的结果更新为左边乘积乘上右边乘积
+            answer[i] *= right_product;
+            // 更新右边元素的乘积
+            right_product *= nums[i];
+        }
+        // 返回结果向量
+        answer
+    }
     pub fn h_index(citations: Vec<i32>) -> i32 {
         // 对引用次数数组进行降序排序
         let mut sorted_citations = citations.clone();
@@ -276,7 +299,14 @@ fn main() {
     // test10();
     // test11();
     // test12();
-    test13();
+    // test13();
+    test14();
+}
+
+fn test14() {
+    let nums = vec![1,2,3,4];
+    let res = Solution::product_except_self(nums);
+    print!("{:?}",res);
 }
 
 fn test13(){
