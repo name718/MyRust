@@ -61,6 +61,36 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
+        let n = gas.len();
+        let mut total_gas = 0;
+        let mut total_cost = 0;
+        let mut current_gas = 0;
+        let mut start_station = 0;
+    
+        // 计算总油量和总消耗
+        for i in 0..n {
+            total_gas += gas[i];
+            total_cost += cost[i];
+        }
+    
+        // 如果总油量小于总消耗，无法绕一圈，返回 -1
+        if total_gas < total_cost {
+            return -1;
+        }
+    
+        // 遍历每个加油站，尝试找到起始加油站
+        for i in 0..n {
+            current_gas += gas[i] - cost[i];
+            if current_gas < 0 {
+                // 如果当前油量不足，从下一个加油站重新开始尝试
+                current_gas = 0;
+                start_station = i + 1;
+            }
+        }
+    
+        start_station as i32
+    }
     fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
         let n = nums.len();
         // 创建一个初始值全为 1 的结果向量
@@ -300,7 +330,15 @@ fn main() {
     // test11();
     // test12();
     // test13();
-    test14();
+    // test14();
+    test15();
+}
+
+fn test15(){
+    let gas = vec![1,2,3,4,5];
+    let cost = vec![3,4,5,1,2];
+    let res = Solution::can_complete_circuit(gas,cost);
+    print!("{}",res);
 }
 
 fn test14() {
