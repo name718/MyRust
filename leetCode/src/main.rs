@@ -61,6 +61,34 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    pub fn roman_to_int(s: String) -> i32 {
+        let mut map = HashMap::new();
+        let mut number = 0;
+        map.insert('I', 1);
+        map.insert('V', 5);
+        map.insert('X', 10);
+        map.insert('L', 50);
+        map.insert('C', 100);
+        map.insert('D', 500);
+        map.insert('M', 1000);
+    
+        let ss: Vec<char> = s.chars().collect();
+        for i in 0..ss.len() {
+            let current_val: i32 = *map.get(&ss[i]).unwrap();
+            let next_val: i32 = if i + 1 < ss.len() {
+                *map.get(&ss[i + 1]).unwrap()
+            } else {
+                0
+            };
+            if current_val < next_val {
+                number -= current_val
+            } else {
+                number += current_val
+            }
+        }
+        println!("{}", number);
+        return number;
+    }
     pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
         let n = gas.len();
         let mut total_gas = 0;
@@ -331,7 +359,14 @@ fn main() {
     // test12();
     // test13();
     // test14();
-    test15();
+    // test15();
+    test16();
+}
+
+fn test16(){
+    let s = String::from("III");
+    let res = Solution::roman_to_int(s);
+    print!("{}",res); 
 }
 
 fn test15(){
