@@ -61,6 +61,35 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    fn int_to_roman(num: i32) -> String {
+        let value_symbols = vec![
+            (1000, "M"),
+            (900, "CM"),
+            (500, "D"),
+            (400, "CD"),
+            (100, "C"),
+            (90, "XC"),
+            (50, "L"),
+            (40, "XL"),
+            (10, "X"),
+            (9, "IX"),
+            (5, "V"),
+            (4, "IV"),
+            (1, "I"),
+        ];
+        let mut n = num.clone();
+        let mut roman = String::new();
+        for (value, symbol) in value_symbols.iter() {
+            while n >= *value {
+                n -= *value;
+                roman.push_str(symbol);
+            }
+            if n == 0 {
+                break;
+            }
+        }
+        roman
+    }
     pub fn roman_to_int(s: String) -> i32 {
         let mut map = HashMap::new();
         let mut number = 0;
@@ -360,7 +389,14 @@ fn main() {
     // test13();
     // test14();
     // test15();
-    test16();
+    // test16();
+    test17();
+}
+
+fn test17(){
+    let s = 4321;
+    let res = Solution::int_to_roman(s);
+    print!("{}",res); 
 }
 
 fn test16(){
