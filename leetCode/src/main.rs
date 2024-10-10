@@ -61,6 +61,13 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    fn length_of_last_word(s: String) -> i32 {
+        let words: Vec<&str> = s.split_whitespace().collect();
+        if words.is_empty() {
+            return 0;
+        }
+        words.last().unwrap().len() as i32
+    }
     fn int_to_roman(num: i32) -> String {
         let value_symbols = vec![
             (1000, "M"),
@@ -390,7 +397,14 @@ fn main() {
     // test14();
     // test15();
     // test16();
-    test17();
+    // test17();
+    test18();
+}
+
+fn test18(){
+    let s = String::from("Hello World");
+    let res = Solution::length_of_last_word(s);
+    print!("{}",res); 
 }
 
 fn test17(){
