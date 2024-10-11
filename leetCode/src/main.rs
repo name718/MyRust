@@ -61,6 +61,25 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    pub fn longest_common_prefix(strs: Vec<String>) -> String {
+        if strs.is_empty() {
+            return String::new();
+        }
+        let mut prefix:String = String::from(&strs[0]);
+    
+        for str in strs.iter() {
+            // println!("first:{}", str);
+            while !str.starts_with(&prefix) {
+                // println!("sencod:{}", prefix);
+                prefix.pop();
+                if prefix.is_empty() {
+                    return String::new();
+                }
+            }
+        }
+        // println!("return:{}", prefix);
+        return prefix;
+    }
     fn length_of_last_word(s: String) -> i32 {
         let words: Vec<&str> = s.split_whitespace().collect();
         if words.is_empty() {
@@ -398,7 +417,14 @@ fn main() {
     // test15();
     // test16();
     // test17();
-    test18();
+    // test18();
+    test19();
+}
+
+fn test19(){
+    let strs = vec![String::from("flower"),String::from("flow"),String::from("flight")];
+    let res = Solution::longest_common_prefix(strs);
+    print!("{}",res); 
 }
 
 fn test18(){
