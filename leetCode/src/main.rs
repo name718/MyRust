@@ -61,6 +61,11 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    pub fn reverse_words(s: String) -> String {
+        let mut words:Vec<&str> = s.split_whitespace().collect();
+        words.reverse();
+        words.join(" ")
+    }
     pub fn longest_common_prefix(strs: Vec<String>) -> String {
         if strs.is_empty() {
             return String::new();
@@ -419,6 +424,12 @@ fn main() {
     // test17();
     // test18();
     test19();
+}
+
+fn test20(){
+    let strs = String::from("the sky is blue");
+    let res = Solution::reverse_words(strs);
+    print!("{}",res); 
 }
 
 fn test19(){
