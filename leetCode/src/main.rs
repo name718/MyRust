@@ -61,6 +61,26 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    pub fn convert(s: String, num_rows: i32) -> String {
+        if num_rows == 1 {
+            return s;
+        }
+        let mut rows = vec![String::new(); num_rows as usize];
+        let mut current_row = 0;
+        let mut going_down = false;
+        for c in s.chars() {
+            rows[current_row as usize].push(c);
+            if current_row == 0 || current_row == num_rows - 1 {
+                going_down =!going_down;
+            }
+            if going_down {
+                current_row += 1;
+            } else {
+                current_row -= 1;
+            }
+        }
+        rows.into_iter().collect()
+    }
     pub fn reverse_words(s: String) -> String {
         let mut words:Vec<&str> = s.split_whitespace().collect();
         words.reverse();
@@ -423,7 +443,15 @@ fn main() {
     // test16();
     // test17();
     // test18();
-    test19();
+    // test19();
+    test21();
+}
+
+fn test21(){
+    let mut s = String::from("PAYPALISHIRING");
+    let mut num_rows = 3;
+    let res = Solution::convert(s,num_rows);
+    print!("{}",res); 
 }
 
 fn test20(){
