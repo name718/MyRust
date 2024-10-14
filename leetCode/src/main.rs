@@ -61,6 +61,16 @@ impl RandomizedSet {
  * let ret_3: i32 = obj.get_random();
  */
 impl Solution {
+    pub fn str_str(haystack: String, needle: String) -> i32 {
+        match haystack.find(&needle) {
+            Some(x) => {
+                x as i32
+            }
+            None => {
+                -1
+            }
+        }
+    }
     pub fn convert(s: String, num_rows: i32) -> String {
         if num_rows == 1 {
             return s;
@@ -445,6 +455,14 @@ fn main() {
     // test18();
     // test19();
     test21();
+}
+
+fn test22(){
+    let haystack = String::from("sadbutsad");
+    let needle = String::from("sad");
+    let mut num_rows = 3;
+    let res = Solution::str_str(haystack,needle);
+    print!("{}",res); 
 }
 
 fn test21(){
