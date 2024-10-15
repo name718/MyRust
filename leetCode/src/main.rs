@@ -432,6 +432,10 @@ impl Solution {
             k -= 1;
         }
     }
+    pub fn is_palindrome(s: String) -> bool {
+        let cleaned_str: String = s.chars().filter(|c| c.is_alphanumeric()).map(|c| c.to_ascii_lowercase()).collect();
+        cleaned_str == cleaned_str.chars().rev().collect::<String>()
+    }
 }
 
 fn main() {
@@ -454,7 +458,14 @@ fn main() {
     // test17();
     // test18();
     // test19();
-    test21();
+    // test21();
+    // test22();
+    test23();
+}
+
+fn test23(){
+    let ss = String::from("A man, a plan, a canal: Panama");
+    Solution::is_palindrome(ss);
 }
 
 fn test22(){
