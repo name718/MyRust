@@ -436,6 +436,17 @@ impl Solution {
         let cleaned_str: String = s.chars().filter(|c| c.is_alphanumeric()).map(|c| c.to_ascii_lowercase()).collect();
         cleaned_str == cleaned_str.chars().rev().collect::<String>()
     }
+    pub fn is_subsequence(s: String, t: String) -> bool {
+        let mut i = 0;
+        let mut j = 0;
+        while i < s.len() && j < t.len() {
+            if s.as_bytes()[i] == t.as_bytes()[j] {
+                i += 1;
+            }
+            j += 1;
+        }
+        i == s.len()
+    }
 }
 
 fn main() {
@@ -460,7 +471,15 @@ fn main() {
     // test19();
     // test21();
     // test22();
-    test23();
+    // test23();
+    test24();
+}
+
+fn test24(){
+    let s = String::from("abc");
+    let t = String::from("ahbgdc");
+    let res = Solution::is_subsequence(s,t);
+    print!("{}",res);
 }
 
 fn test23(){
