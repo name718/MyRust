@@ -447,6 +447,23 @@ impl Solution {
         }
         i == s.len()
     }
+    pub fn two_sum(numbers: Vec<i32>, target: i32) -> Vec<i32> {
+        let mut left = 0;
+        let mut right = numbers.len() - 1;
+    
+        while left < right {
+            let sum = numbers[left as usize] + numbers[right as usize];
+            if sum == target {
+                return vec![left as i32 + 1, right as i32 + 1];
+            } else if sum < target {
+                left += 1;
+            } else {
+                right -= 1;
+            }
+        }
+    
+        vec![]
+    }
 }
 
 fn main() {
@@ -472,7 +489,15 @@ fn main() {
     // test21();
     // test22();
     // test23();
-    test24();
+    // test24();
+    test25();
+}
+
+fn test25(){
+    let numbers = vec![2,7,11,15];
+    let target = 9;
+    let res = Solution::two_sum(numbers,target);
+    print!("{:?}",res);
 }
 
 fn test24(){
