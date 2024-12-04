@@ -464,6 +464,40 @@ impl Solution {
     
         vec![]
     }
+    fn count_words(lines: Vec<&str>) -> usize {
+        let mut word_count = 0;
+        let mut prev_word = String::new(); // 存储被 `-` 连接的前半部分单词
+
+        for line in lines {
+            // 移除多余的标点符号，并以空格分割单词
+            let clean_line = line.replace(',', " ").replace('.', " ");
+            let parts: Vec<&str> = clean_line.split_whitespace().collect();
+
+            for part in parts {
+                if part.ends_with('-') {
+                    // 如果是连接符，移除 `-` 并暂存单词
+                    prev_word = part.trim_end_matches('-').to_string();
+                } else {
+                    // 如果有前半部分单词，则合并
+                    if !prev_word.is_empty() {
+                        word_count += 1;
+                        prev_word.clear(); // 清空前半部分
+                    }
+                    // 检查当前单词是否有效
+                    if !part.is_empty() {
+                        word_count += 1;
+                    }
+                }
+            }
+        }
+
+        // 如果最后仍有未完成的连接单词，则计入
+        if !prev_word.is_empty() {
+            word_count += 1;
+        }
+
+        word_count
+    }
 }
 
 fn main() {
